@@ -6,7 +6,7 @@
     <string name="password">Password</string>
     <string name="enter_your_password">Enter your password</string>
     <string name="login">Login</string>
-    <string name="error_string">Error</string>
+    <string name="error_string">Field must not be empty</string>
     <string name="home">Home</string>
     <string name="farmers">Farmers</string>
     <string name="farms">Farms</string>
