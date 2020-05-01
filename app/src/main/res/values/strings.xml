@@ -22,4 +22,7 @@
     <string name="address">Address</string>
     <string name="phone_number">Phone Number</string>
     <string name="save">SAVE</string>
+    <string name="farmer_name">Adejobi Omogbolahan</string>
+    <string name="farmer_address">Number 10, Oke-Ayo, Lagos, Nigeria</string>
+    <string name="farmer_phone">09012345678</string>
 </resources>

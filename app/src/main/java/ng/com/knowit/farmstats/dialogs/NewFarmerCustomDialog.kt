@@ -17,6 +17,8 @@ import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
 import ng.com.knowit.farmstats.R
 import ng.com.knowit.farmstats.databinding.NewFarmerDialogLayoutBinding
+import ng.com.knowit.farmstats.db.FarmerDatabase
+import ng.com.knowit.farmstats.model.Farmer
 import ng.com.knowit.farmstats.utility.Utils
 import java.io.File
 import java.io.IOException
@@ -28,6 +30,8 @@ class NewFarmerCustomDialog : DialogFragment() {
     private lateinit var binding: NewFarmerDialogLayoutBinding
 
     private val TAG: String = NewFarmerCustomDialog::class.java.simpleName
+
+    private var photoUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,7 +88,18 @@ class NewFarmerCustomDialog : DialogFragment() {
             }
             if (noErrors) {
                 //save farmer
+                val farmerFirstName = binding.farmerFirstNameInputEditText.text.toString()
+                val farmerLastNme = binding.farmerLastNameInputEditText.text.toString()
+                val farmerAddress = binding.farmerAddressInputEditText.text.toString()
+                val farmerPhoneNumber = binding.farmerPhoneNumberInputEditText.text.toString()
 
+                saveFarmer(
+                    farmerFirstName,
+                    farmerLastNme,
+                    farmerAddress,
+                    farmerPhoneNumber,
+                    photoUri
+                )
                 dismiss()
             }
             true
@@ -119,6 +134,7 @@ class NewFarmerCustomDialog : DialogFragment() {
 
                     startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
                     Log.d(TAG, photoURI.toString())
+                    photoUri = photoURI
                     Glide.with(context!!).load(photoURI).into(binding.farmerImage)
                 }
             }
@@ -143,15 +159,27 @@ class NewFarmerCustomDialog : DialogFragment() {
         }
     }
 
-    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
-            val imageBitmap = data!!.extras!!.get("data") as Bitmap
-            //imageView.setImageBitmap(imageBitmap)
-           //val path = data!!.extras!!.get(MediaStore.EXTRA_OUTPUT)
+    private fun saveFarmer(
+        farmerFirstName: String,
+        farmerLastName: String,
+        farmerAddress: String,
+        farmerPhoneNumber: String,
+        farmerPhotoUri: Uri?
+    ) {
+        val farmerDao = FarmerDatabase.DatabaseProvider.getDatabase(context!!).farmerDao()
 
-            Log.d(TAG, "Got here" + imageBitmap.toString())
-        }
-    }*/
+        farmerDao.insert(
+            Farmer(
+                farmerFirstName,
+                farmerLastName,
+                farmerAddress,
+                farmerPhoneNumber,
+                farmerPhotoUri.toString(),
+                System.currentTimeMillis().toString()
+            )
+        )
+        Log.d(TAG, "Saved")
+    }
 
     companion object {
         private val TAG = NewFarmerCustomDialog::class.java.simpleName
