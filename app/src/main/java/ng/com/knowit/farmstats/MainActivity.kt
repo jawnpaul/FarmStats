@@ -6,10 +6,11 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 import com.crashlytics.android.Crashlytics
-import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.fabric.sdk.android.Fabric
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,10 +23,10 @@ class MainActivity : AppCompatActivity() {
             Fabric.with(this, Crashlytics())
         }
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+        val navController = Navigation.findNavController(this, R.id.navHostFragment)
+        val mainBottomNavigation = findViewById<BottomNavigationView>(R.id.nav_view)
+        NavigationUI.setupWithNavController(mainBottomNavigation, navController)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -50,5 +51,6 @@ class MainActivity : AppCompatActivity() {
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         return cm.activeNetworkInfo != null &&
                 cm.activeNetworkInfo.isConnectedOrConnecting
+
     }
 }
