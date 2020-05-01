@@ -7,4 +7,10 @@
     <string name="enter_your_password">Enter your password</string>
     <string name="login">Login</string>
     <string name="error_string">Error</string>
+    <string name="home">Home</string>
+    <string name="farmers">Farmers</string>
+    <string name="farms">Farms</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
