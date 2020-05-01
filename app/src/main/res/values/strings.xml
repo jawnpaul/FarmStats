@@ -17,4 +17,9 @@
     <string name="farm">FARM</string>
     <string name="statistics">STATISTICS</string>
     <string name="create_farmer_helper_text">You can create a new farmer to populate the database</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="address">Address</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="save">SAVE</string>
 </resources>
