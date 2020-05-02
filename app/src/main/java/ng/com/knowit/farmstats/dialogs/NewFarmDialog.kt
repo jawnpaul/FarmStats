@@ -13,18 +13,22 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.textfield.TextInputLayout
 import ng.com.knowit.farmstats.R
 import ng.com.knowit.farmstats.databinding.NewFarmDialogLayoutBinding
 import ng.com.knowit.farmstats.utility.Utils
-import java.util.*
+
 
 class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
 
     private lateinit var binding: NewFarmDialogLayoutBinding
 
     private lateinit var mMap: GoogleMap
+
+    private lateinit var marker: Marker
 
     private val REQUEST_LOCATION_PERMISSION = 1
 
@@ -117,26 +121,33 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
         setMapLongClick(mMap)
 
         setPoiClick(mMap)
+
         enableLocation()
+
+        mMap.setOnMarkerClickListener { marker ->
+            marker.remove()
+            true
+        }
     }
 
     private fun setMapLongClick(map: GoogleMap) {
+
+
         map.setOnMapLongClickListener { latLng ->
 
-            val snippet = String.format(
+            placeMarkerOnMap(latLng)
+            /*val snippet = String.format(
                 Locale.getDefault(),
                 "Lat: %1$.5f, Long: %2$.5f",
                 latLng.latitude,
                 latLng.longitude
             )
-            map.addMarker(
-                MarkerOptions()
-                    .position(latLng)
-                    .title("Hey there")
+            map.addMarker(MarkerOptions().position(latLng)
                     //.title(getString(R.string.dropped_pin))
-                    .snippet(snippet)
-
+                .snippet(snippet)
             )
+            //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14F))
+*/
         }
     }
 
@@ -150,6 +161,15 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
             poiMarker.showInfoWindow()
         }
     }
+
+    private fun placeMarkerOnMap(location: LatLng) {
+        val markerOptions = MarkerOptions().position(location)
+        //val titleStr = getAddress(location)
+        //markerOptions.title(titleStr)
+        marker = mMap.addMarker(markerOptions)
+    }
+
+
 
     private fun isPermissionGranted(): Boolean {
         return ContextCompat.checkSelfPermission(
