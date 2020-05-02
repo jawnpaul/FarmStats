@@ -25,4 +25,8 @@
     <string name="farmer_name">Adejobi Omogbolahan</string>
     <string name="farmer_address">Number 10, Oke-Ayo, Lagos, Nigeria</string>
     <string name="farmer_phone">09012345678</string>
+    <string name="farm_name">Farm Name</string>
+    <string name="farm_location">Farm Location</string>
+    <string name="select_a_farmer">Select a farmer:</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

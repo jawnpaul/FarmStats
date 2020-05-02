@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import ng.com.knowit.farmstats.R
 import ng.com.knowit.farmstats.databinding.FragmentHomeBinding
+import ng.com.knowit.farmstats.dialogs.NewFarmDialog
 import ng.com.knowit.farmstats.dialogs.NewFarmerCustomDialog
 
 /**
@@ -37,6 +38,8 @@ class HomeFragment : Fragment() {
 
         binding.createFarmCard.setOnClickListener {
             //open dialog for farm creation
+
+            NewFarmDialog.display(childFragmentManager)
         }
 
         super.onViewCreated(view, savedInstanceState)

@@ -135,7 +135,9 @@ class NewFarmerCustomDialog : DialogFragment() {
                     startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
                     Log.d(TAG, photoURI.toString())
                     photoUri = photoURI
-                    Glide.with(context!!).load(photoURI).into(binding.farmerImage)
+                    Glide.with(context!!).load(photoURI)
+                        .placeholder(R.drawable.undraw_male_avatar)
+                        .into(binding.farmerImage)
                 }
             }
         }
