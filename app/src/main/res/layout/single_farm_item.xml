@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:orientation="vertical"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/farm_name_"
+                android:textColor="@color/colorPrimaryText"
+                android:textStyle="bold"
+                app:fontFamily="@font/roboto" />
+
+            <TextView
+                android:id="@+id/single_farm_name_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/farm"
+                android:textAllCaps="false"
+                android:textColor="@color/colorSecondaryText"
+                app:fontFamily="@font/roboto" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/farm_location_"
+                android:textColor="@color/colorPrimaryText"
+                android:textStyle="bold"
+                app:fontFamily="@font/roboto" />
+
+            <TextView
+                android:id="@+id/single_farm_location_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/farm"
+                android:textAllCaps="false"
+                android:textColor="@color/colorSecondaryText"
+                app:fontFamily="@font/roboto" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/farm_owner"
+                android:textColor="@color/colorPrimaryText"
+                android:textStyle="bold"
+                app:fontFamily="@font/roboto" />
+
+            <TextView
+                android:id="@+id/single_farm_owner_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/farm"
+                android:textAllCaps="false"
+                android:textColor="@color/colorSecondaryText"
+                app:fontFamily="@font/roboto" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
+

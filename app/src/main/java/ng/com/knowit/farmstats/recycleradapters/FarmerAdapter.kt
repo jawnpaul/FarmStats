@@ -12,7 +12,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 import ng.com.knowit.farmstats.R
 import ng.com.knowit.farmstats.model.Farmer
 
-class FarmerAdapter(val farmerList: List<Farmer>, val context: Context) :
+class FarmerAdapter(private val farmerList: List<Farmer>, val context: Context) :
     RecyclerView.Adapter<FarmerAdapter.ViewHolder>() {
 
 

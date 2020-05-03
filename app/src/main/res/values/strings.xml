@@ -30,4 +30,7 @@
     <string name="select_a_farmer">Select a farmer:</string>
     <string name="title_activity_maps">Map</string>
     <string name="choose_farm_boundaries">Choose farm boundaries on the map</string>
+    <string name="farm_name_">Farm Name:</string>
+    <string name="farm_location_">Farm Location:</string>
+    <string name="farm_owner">Farm Owner:</string>
 </resources>
