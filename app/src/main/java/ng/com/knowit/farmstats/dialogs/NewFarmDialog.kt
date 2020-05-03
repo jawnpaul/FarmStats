@@ -2,6 +2,7 @@ package ng.com.knowit.farmstats.dialogs
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.PolygonOptions
 import com.google.android.material.textfield.TextInputLayout
 import ng.com.knowit.farmstats.R
 import ng.com.knowit.farmstats.databinding.NewFarmDialogLayoutBinding
@@ -31,6 +33,8 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
     private lateinit var marker: Marker
 
     private val REQUEST_LOCATION_PERMISSION = 1
+
+    val farmCoordinates = mutableListOf<LatLng>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,6 +108,7 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
             .findFragmentById(R.id.farm_map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+
     }
 
     companion object {
@@ -120,14 +125,35 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
         mMap = googleMap
         setMapLongClick(mMap)
 
-        setPoiClick(mMap)
+        //setPoiClick(mMap)
 
         enableLocation()
 
+        /*val polygon1: Polygon = googleMap.addPolygon(
+            PolygonOptions()
+                .clickable(true)
+                .add(
+                    LatLng(-27.457, 153.040),
+                    LatLng(-33.852, 151.211),
+                    LatLng(-37.813, 144.962),
+                    LatLng(-34.928, 138.599)
+                )
+        )
+        // Store a data object with the polygon, used here to indicate an arbitrary type.
+        // Store a data object with the polygon, used here to indicate an arbitrary type.
+        polygon1.setTag("alpha")*/
+
+        //updateMap()
+
         mMap.setOnMarkerClickListener { marker ->
             marker.remove()
+            farmCoordinates.remove(marker.position)
+
+            updateMap(farmCoordinates)
             true
         }
+
+
     }
 
     private fun setMapLongClick(map: GoogleMap) {
@@ -167,6 +193,10 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
         //val titleStr = getAddress(location)
         //markerOptions.title(titleStr)
         marker = mMap.addMarker(markerOptions)
+
+        farmCoordinates.add(location)
+        updateMap(farmCoordinates)
+
     }
 
 
@@ -200,5 +230,21 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
                 enableLocation()
             }
         }
+    }
+
+    private fun getPolygonOptions(list: List<LatLng>): PolygonOptions {
+        val pathOptions = PolygonOptions().strokeColor(Color.BLACK)
+        pathOptions.addAll(list)
+        return pathOptions
+    }
+
+    private fun updateMap(list: List<LatLng>) {
+
+        if (list.size >= 1) {
+            mMap.addPolygon(getPolygonOptions(list))
+        } else {
+            mMap.clear()
+        }
+
     }
 }
