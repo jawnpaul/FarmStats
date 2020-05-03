@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import ng.com.knowit.farmstats.model.Farmer
 
-@Database(entities = arrayOf(Farmer::class), version = 1)
+@Database(entities = arrayOf(Farmer::class), version = 2)
 abstract class FarmerDatabase : RoomDatabase() {
 
 

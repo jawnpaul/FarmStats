@@ -1,12 +1,15 @@
 package ng.com.knowit.farmstats.dialogs
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
@@ -21,6 +24,9 @@ import com.google.android.gms.maps.model.PolygonOptions
 import com.google.android.material.textfield.TextInputLayout
 import ng.com.knowit.farmstats.R
 import ng.com.knowit.farmstats.databinding.NewFarmDialogLayoutBinding
+import ng.com.knowit.farmstats.db.FarmerDao
+import ng.com.knowit.farmstats.db.FarmerDatabase
+import ng.com.knowit.farmstats.model.Farmer
 import ng.com.knowit.farmstats.utility.Utils
 
 
@@ -31,6 +37,10 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
 
     private lateinit var marker: Marker
+
+    private lateinit var spinner: Spinner
+
+    private var farmersArray = arrayOf<String>()
 
     private val REQUEST_LOCATION_PERMISSION = 1
 
@@ -52,6 +62,10 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
 
         binding =
             DataBindingUtil.inflate(inflater, R.layout.new_farm_dialog_layout, container, false)
+
+        spinner = binding.farmersSpinner
+
+
         return binding.root
     }
 
@@ -66,10 +80,7 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
         }
     }
 
-    override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?
-    ) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val rootView = view.findViewById<View>(R.id.new_farmer_linear_layout)
         val textInputLayouts: List<TextInputLayout> = Utils.findViewsWithType(
@@ -97,8 +108,6 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
                 val farmerLastNme = binding.farmLocationInputEditText.text.toString()
 
 
-
-
                 dismiss()
             }
             true
@@ -108,6 +117,13 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
             .findFragmentById(R.id.farm_map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        farmersArray = farmersNames(context!!)
+
+
+        val farmerNamesAdapter =
+            ArrayAdapter(context!!, android.R.layout.simple_spinner_item, farmersArray)
+        farmerNamesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = farmerNamesAdapter
 
     }
 
@@ -246,5 +262,21 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
             mMap.clear()
         }
 
+    }
+
+    private fun farmersNames(context: Context): Array<String> {
+        val farmersArrayList: ArrayList<Farmer>
+
+        val farmerDao: FarmerDao = FarmerDatabase.DatabaseProvider.getDatabase(context).farmerDao()
+
+        farmersArrayList = farmerDao.getAllFarmerList() as ArrayList<Farmer>
+
+        val farmersNamesList = ArrayList<String>()
+        for (farmer in farmersArrayList) {
+            farmersNamesList.add(farmer.farmerFullName!!)
+        }
+        val array = arrayOfNulls<String>(farmersNamesList.size)
+
+        return farmersNamesList.toArray(array)
     }
 }

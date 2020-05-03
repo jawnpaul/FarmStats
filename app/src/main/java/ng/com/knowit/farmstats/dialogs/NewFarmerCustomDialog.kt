@@ -177,6 +177,7 @@ class NewFarmerCustomDialog : DialogFragment() {
                 farmerAddress,
                 farmerPhoneNumber,
                 farmerPhotoUri.toString(),
+                farmerFirstName + " " + farmerLastName,
                 System.currentTimeMillis().toString()
             )
         )

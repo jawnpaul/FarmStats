@@ -44,7 +44,7 @@ class FarmerAdapter(val farmerList: List<Farmer>, val context: Context) :
 
         val farmer = farmerList[position]
 
-        holder.farmerNameTextView.text = "${farmer.farmerFirstName} ${farmer.farmerLastName}"
+        holder.farmerNameTextView.text = farmer.farmerFullName
         holder.farmerAddressTextView.text = farmer.farmerAddress
         holder.farmerPhoneTextView.text = farmer.farmerPhoneNumber
         Glide.with(context)
