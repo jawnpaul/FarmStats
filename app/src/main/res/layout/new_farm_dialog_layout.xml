@@ -88,7 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
-                    android:text="Select points on the map"
+                    android:text="@string/choose_farm_boundaries"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="18sp" />
 

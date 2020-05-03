@@ -23,4 +23,7 @@ interface FarmerDao {
 
     @Query("SELECT * FROM farmer_table ORDER BY farmerLocalId ASC")
     fun getAllFarmerList(): List<Farmer>
+
+    @Query("SELECT * FROM farmer_table WHERE farmerFullName LIKE :query")
+    fun getFarmerByFullName(query: String): Farmer
 }

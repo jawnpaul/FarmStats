@@ -2,7 +2,6 @@ package ng.com.knowit.farmstats.recycleradapters
 
 import android.content.Context
 import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,10 +50,6 @@ class FarmerAdapter(val farmerList: List<Farmer>, val context: Context) :
             .load(Uri.parse(farmer.farmerPhotoUri))
             .placeholder(R.drawable.undraw_male_avatar)
             .into(holder.farmerImageView)
-
-
-
-        Log.d("FarmerAdapter", farmer.farmerPhotoUri.toString())
 
     }
 }

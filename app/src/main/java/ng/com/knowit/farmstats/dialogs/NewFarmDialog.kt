@@ -5,11 +5,13 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
@@ -24,8 +26,10 @@ import com.google.android.gms.maps.model.PolygonOptions
 import com.google.android.material.textfield.TextInputLayout
 import ng.com.knowit.farmstats.R
 import ng.com.knowit.farmstats.databinding.NewFarmDialogLayoutBinding
+import ng.com.knowit.farmstats.db.FarmDatabase
 import ng.com.knowit.farmstats.db.FarmerDao
 import ng.com.knowit.farmstats.db.FarmerDatabase
+import ng.com.knowit.farmstats.model.Farm
 import ng.com.knowit.farmstats.model.Farmer
 import ng.com.knowit.farmstats.utility.Utils
 
@@ -104,11 +108,20 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
             }
             if (noErrors) {
                 //save farm
-                val farmerFirstName = binding.farmNameInputEditText.text.toString()
-                val farmerLastNme = binding.farmLocationInputEditText.text.toString()
+                val farmName = binding.farmNameInputEditText.text.toString()
+                val farmLocation = binding.farmLocationInputEditText.text.toString()
 
+                val farmerFullName = spinner.selectedItem.toString()
 
-                dismiss()
+                if (farmerFullName.isNotEmpty()) {
+
+                    saveFarm(farmerFullName, farmName, farmLocation, farmCoordinates)
+                    //dismiss()
+                } else {
+                    Toast.makeText(context!!, "No farmers created", Toast.LENGTH_SHORT).show()
+
+                }
+                //dismiss()
             }
             true
         }
@@ -278,5 +291,38 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
         val array = arrayOfNulls<String>(farmersNamesList.size)
 
         return farmersNamesList.toArray(array)
+    }
+
+    private fun getFarmerLocalId(context: Context, farmerFullName: String): Int {
+        val farmerDao: FarmerDao = FarmerDatabase.DatabaseProvider.getDatabase(context).farmerDao()
+        return farmerDao.getFarmerByFullName(farmerFullName).farmerLocalId
+    }
+
+    private fun saveFarm(
+        farmerName: String,
+        farmName: String,
+        farmLocation: String,
+        farmCoordinates: List<LatLng>
+    ) {
+
+        val farmDao = FarmDatabase.DatabaseProvider.getDatabase(context!!).farmDao()
+
+        //Checks for valid coordinates
+        if (farmCoordinates.size >= 1) {
+            farmDao.insert(
+                Farm(
+                    farmerName,
+                    getFarmerLocalId(context!!, farmerName),
+                    farmName, farmLocation, farmCoordinates
+                )
+            )
+            Log.d("FarmDialog", "Farm Saved")
+            dismiss()
+        } else {
+            Toast.makeText(context!!, "Select farm boundaries on the map", Toast.LENGTH_SHORT)
+                .show()
+        }
+
+
     }
 }
