@@ -11,6 +11,7 @@ data class Farmer(
     @ColumnInfo(name = "farmerAddress") var farmerAddress: String?,
     @ColumnInfo(name = "farmerPhoneNumber") var farmerPhoneNumber: String?,
     @ColumnInfo(name = "farmerPhotoUri") var farmerPhotoUri: String?,
+    @ColumnInfo(name = "farmerFullName") var farmerFullName: String?,
     @ColumnInfo(name = "farmerDateCreated") var farmerDateCreated: String?
 ) {
 
