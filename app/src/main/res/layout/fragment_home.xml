@@ -37,7 +37,22 @@
                     android:focusable="true"
                     android:minHeight="200dp"
                     app:cardBackgroundColor="@color/colorPrimaryLight"
-                    app:cardCornerRadius="20dp" />
+                    app:cardCornerRadius="20dp">
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/pie_chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:padding="8dp"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/no_data_image_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_undraw_no_data" />
+                </androidx.cardview.widget.CardView>
 
 
                 <TextView
