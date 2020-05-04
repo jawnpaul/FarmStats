@@ -199,7 +199,7 @@ class NewFarmerCustomDialog : DialogFragment() {
         farmerPhoneNumber: String,
         farmerPhotoUri: Uri?
     ) {
-        val farmerDao = FarmerDatabase.DatabaseProvider.getDatabase(context!!).farmerDao()
+        val farmerDao = FarmerDatabase.DatabaseProvider.getFarmerDatabase(context!!).farmerDao()
 
         farmerDao.insert(
             Farmer(

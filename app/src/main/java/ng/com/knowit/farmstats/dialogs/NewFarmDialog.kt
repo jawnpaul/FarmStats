@@ -178,27 +178,11 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        setMapLongClick(mMap)
+        setOnMapClick(mMap)
 
         //setPoiClick(mMap)
 
         enableLocation()
-
-        /*val polygon1: Polygon = googleMap.addPolygon(
-            PolygonOptions()
-                .clickable(true)
-                .add(
-                    LatLng(-27.457, 153.040),
-                    LatLng(-33.852, 151.211),
-                    LatLng(-37.813, 144.962),
-                    LatLng(-34.928, 138.599)
-                )
-        )
-        // Store a data object with the polygon, used here to indicate an arbitrary type.
-        // Store a data object with the polygon, used here to indicate an arbitrary type.
-        polygon1.setTag("alpha")*/
-
-        //updateMap()
 
         mMap.setOnMarkerClickListener { marker ->
             marker.remove()
@@ -211,11 +195,8 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
 
     }
 
-    private fun setMapLongClick(map: GoogleMap) {
-
-
-        map.setOnMapLongClickListener { latLng ->
-
+    private fun setOnMapClick(map: GoogleMap) {
+        map.setOnMapClickListener { latLng ->
             placeMarkerOnMap(latLng)
         }
     }
@@ -292,7 +273,8 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
     private fun farmersNames(context: Context): Array<String> {
         val farmersArrayList: ArrayList<Farmer>
 
-        val farmerDao: FarmerDao = FarmerDatabase.DatabaseProvider.getDatabase(context).farmerDao()
+        val farmerDao: FarmerDao =
+            FarmerDatabase.DatabaseProvider.getFarmerDatabase(context).farmerDao()
 
         farmersArrayList = farmerDao.getAllFarmerList() as ArrayList<Farmer>
 
@@ -307,7 +289,8 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
     }
 
     private fun getFarmerLocalId(context: Context, farmerFullName: String): Int {
-        val farmerDao: FarmerDao = FarmerDatabase.DatabaseProvider.getDatabase(context).farmerDao()
+        val farmerDao: FarmerDao =
+            FarmerDatabase.DatabaseProvider.getFarmerDatabase(context).farmerDao()
         return farmerDao.getFarmerByFullName(farmerFullName).farmerLocalId
     }
 
@@ -317,7 +300,7 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
         farmLocation: String,
         farmCoordinates: List<LatLng>
     ) {
-        val farmDao = FarmDatabase.DatabaseProvider.getDatabase(context!!).farmDao()
+        val farmDao = FarmDatabase.DatabaseProvider.getFarmDatabase(context!!).farmDao()
 
         if (farmerName == "Select a Farmer") {
 

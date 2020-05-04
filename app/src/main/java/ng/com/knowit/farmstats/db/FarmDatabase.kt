@@ -14,7 +14,7 @@ abstract class FarmDatabase : RoomDatabase() {
     object DatabaseProvider {
 
         private lateinit var INSTANCE: FarmDatabase
-        fun getDatabase(context: Context): FarmDatabase {
+        fun getFarmDatabase(context: Context): FarmDatabase {
             synchronized(FarmDatabase::class.java) {
                 if (!::INSTANCE.isInitialized) {
                     INSTANCE = Room.databaseBuilder(

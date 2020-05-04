@@ -14,6 +14,8 @@ import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.utils.MPPointF
 import ng.com.knowit.farmstats.R
 import ng.com.knowit.farmstats.databinding.FragmentHomeBinding
+import ng.com.knowit.farmstats.db.FarmDatabase
+import ng.com.knowit.farmstats.db.FarmerDatabase
 import ng.com.knowit.farmstats.dialogs.NewFarmDialog
 import ng.com.knowit.farmstats.dialogs.NewFarmerCustomDialog
 
@@ -48,7 +50,7 @@ class HomeFragment : Fragment() {
             NewFarmDialog.display(childFragmentManager)
         }
 
-        loadPieChart(10, 0)
+        loadPieChart(numberOfFarms(), numberOfFarmers())
 
 
         super.onViewCreated(view, savedInstanceState)
@@ -85,5 +87,13 @@ class HomeFragment : Fragment() {
 
     }
 
+    private fun numberOfFarmers(): Int {
+        val farmerDao = FarmerDatabase.DatabaseProvider.getFarmerDatabase(context!!).farmerDao()
+        return farmerDao.getAllFarmerList().size
+    }
 
+    private fun numberOfFarms(): Int {
+        val farmDao = FarmDatabase.DatabaseProvider.getFarmDatabase(context!!).farmDao()
+        return farmDao.getAllFarmsList().size
+    }
 }

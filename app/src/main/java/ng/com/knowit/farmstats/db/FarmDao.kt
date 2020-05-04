@@ -21,4 +21,7 @@ interface FarmDao {
 
     @Query("SELECT * FROM farm_table ORDER BY farmLocalId ASC")
     fun getAllFarms(): LiveData<List<Farm>>
+
+    @Query("SELECT * FROM farm_table ORDER BY farmLocalId ASC")
+    fun getAllFarmsList(): List<Farm>
 }
