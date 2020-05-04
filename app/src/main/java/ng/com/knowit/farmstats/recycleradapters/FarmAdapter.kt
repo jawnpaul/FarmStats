@@ -36,5 +36,6 @@ class FarmAdapter(private val farmList: List<Farm>) :
         holder.farmLocationTextView.text = farm.farmLocation
         holder.farmOwnerTextView.text = farm.farmerName
 
+
     }
 }

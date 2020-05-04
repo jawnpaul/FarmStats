@@ -53,4 +53,9 @@ class MainActivity : AppCompatActivity() {
                 cm.activeNetworkInfo.isConnectedOrConnecting
 
     }
+
+    override fun onBackPressed() {
+        // disable going back to the LoginActivity
+        moveTaskToBack(true)
+    }
 }

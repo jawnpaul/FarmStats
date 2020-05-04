@@ -33,6 +33,7 @@
                 android:orientation="vertical">
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_margin="15dp"
                     android:layout_gravity="center_horizontal"
                     android:id="@+id/farmer_image"
                     android:layout_width="100dp"
@@ -41,12 +42,26 @@
                     app:civ_border_color="#FF000000"
                     app:civ_border_width="2dp" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:drawableStart="@drawable/ic_format_size_black_24dp"
+                    android:drawablePadding="25dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/first_name"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    app:fontFamily="@font/roboto" />
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/farmerFirstNameTextInputLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
                     android:hint="@string/first_name"
                     app:counterEnabled="false"
                     app:errorEnabled="true"
@@ -60,12 +75,27 @@
                         android:inputType="textPersonName" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:drawableStart="@drawable/ic_format_size_black_24dp"
+                    android:drawablePadding="25dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/last_name"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    app:fontFamily="@font/roboto" />
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/farmerLastNameTextInputLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
                     android:hint="@string/last_name"
                     app:counterEnabled="false"
                     app:errorEnabled="true"
@@ -79,12 +109,26 @@
                         android:inputType="textPersonName" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:drawableStart="@drawable/ic_home_black_24dp"
+                    android:drawablePadding="25dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/address"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    app:fontFamily="@font/roboto" />
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/farmerAddressTextInputLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
                     android:hint="@string/address"
                     app:counterEnabled="false"
                     app:errorEnabled="true"
@@ -99,12 +143,26 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:drawableStart="@drawable/ic_phone_black_24dp"
+                    android:drawablePadding="25dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/phone_number"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    app:fontFamily="@font/roboto" />
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/farmerPhoneNumberTextInputLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
                     android:hint="@string/phone_number"
                     app:counterEnabled="false"
                     app:errorEnabled="true"
@@ -117,6 +175,16 @@
                         android:fontFamily="@font/roboto"
                         android:inputType="phone" />
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/save_farmer_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="@string/save" />
+
             </LinearLayout>
         </ScrollView>
 

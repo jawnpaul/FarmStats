@@ -105,6 +105,37 @@ class NewFarmerCustomDialog : DialogFragment() {
             true
         }
 
+        binding.saveFarmerButton.setOnClickListener {
+
+            var noErrors = true
+            for (textInputLayout in textInputLayouts) {
+                val editTextString =
+                    textInputLayout.editText!!.text.toString()
+                if (editTextString.isEmpty()) {
+                    textInputLayout.error = resources.getString(R.string.error_string)
+                    noErrors = false
+                } else {
+                    textInputLayout.error = null
+                }
+            }
+            if (noErrors) {
+                //save farmer
+                val farmerFirstName = binding.farmerFirstNameInputEditText.text.toString()
+                val farmerLastNme = binding.farmerLastNameInputEditText.text.toString()
+                val farmerAddress = binding.farmerAddressInputEditText.text.toString()
+                val farmerPhoneNumber = binding.farmerPhoneNumberInputEditText.text.toString()
+
+                saveFarmer(
+                    farmerFirstName,
+                    farmerLastNme,
+                    farmerAddress,
+                    farmerPhoneNumber,
+                    photoUri
+                )
+                dismiss()
+            }
+
+        }
 
         binding.farmerImage.setOnClickListener {
             dispatchTakePictureIntent()

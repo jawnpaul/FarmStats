@@ -114,6 +114,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun onLoginSuccess() {
+        binding.loginButton.isEnabled = true
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
 

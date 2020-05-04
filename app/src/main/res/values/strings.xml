@@ -33,4 +33,5 @@
     <string name="farm_name_">Farm Name:</string>
     <string name="farm_location_">Farm Location:</string>
     <string name="farm_owner">Farm Owner:</string>
+    <string name="name">Name</string>
 </resources>

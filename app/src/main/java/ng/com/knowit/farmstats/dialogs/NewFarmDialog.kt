@@ -113,17 +113,43 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
 
                 val farmerFullName = spinner.selectedItem.toString()
 
-                if (farmerFullName.isNotEmpty()) {
+                saveFarm(farmerFullName, farmName, farmLocation, farmCoordinates)
+                /*if (farmerFullName.isNotEmpty()) {
 
                     saveFarm(farmerFullName, farmName, farmLocation, farmCoordinates)
                     //dismiss()
                 } else {
                     Toast.makeText(context!!, "No farmers created", Toast.LENGTH_SHORT).show()
 
-                }
+                }*/
                 //dismiss()
             }
             true
+        }
+
+        binding.saveFarmButton.setOnClickListener {
+
+            var noErrors = true
+            for (textInputLayout in textInputLayouts) {
+                val editTextString =
+                    textInputLayout.editText!!.text.toString()
+                if (editTextString.isEmpty()) {
+                    textInputLayout.error = resources.getString(R.string.error_string)
+                    noErrors = false
+                } else {
+                    textInputLayout.error = null
+                }
+            }
+            if (noErrors) {
+                //save farm
+                val farmName = binding.farmNameInputEditText.text.toString()
+                val farmLocation = binding.farmLocationInputEditText.text.toString()
+
+                val farmerFullName = spinner.selectedItem.toString()
+
+                saveFarm(farmerFullName, farmName, farmLocation, farmCoordinates)
+
+            }
         }
 
         val mapFragment = childFragmentManager
@@ -191,18 +217,6 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
         map.setOnMapLongClickListener { latLng ->
 
             placeMarkerOnMap(latLng)
-            /*val snippet = String.format(
-                Locale.getDefault(),
-                "Lat: %1$.5f, Long: %2$.5f",
-                latLng.latitude,
-                latLng.longitude
-            )
-            map.addMarker(MarkerOptions().position(latLng)
-                    //.title(getString(R.string.dropped_pin))
-                .snippet(snippet)
-            )
-            //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14F))
-*/
         }
     }
 
@@ -219,8 +233,6 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
 
     private fun placeMarkerOnMap(location: LatLng) {
         val markerOptions = MarkerOptions().position(location)
-        //val titleStr = getAddress(location)
-        //markerOptions.title(titleStr)
         marker = mMap.addMarker(markerOptions)
 
         farmCoordinates.add(location)
@@ -285,6 +297,7 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
         farmersArrayList = farmerDao.getAllFarmerList() as ArrayList<Farmer>
 
         val farmersNamesList = ArrayList<String>()
+        farmersNamesList.add("Select a Farmer")
         for (farmer in farmersArrayList) {
             farmersNamesList.add(farmer.farmerFullName!!)
         }
@@ -304,23 +317,31 @@ class NewFarmDialog : DialogFragment(), OnMapReadyCallback {
         farmLocation: String,
         farmCoordinates: List<LatLng>
     ) {
-
         val farmDao = FarmDatabase.DatabaseProvider.getDatabase(context!!).farmDao()
 
-        //Checks for valid coordinates
-        if (farmCoordinates.size >= 1) {
-            farmDao.insert(
-                Farm(
-                    farmerName,
-                    getFarmerLocalId(context!!, farmerName),
-                    farmName, farmLocation, farmCoordinates
-                )
-            )
-            Log.d("FarmDialog", "Farm Saved")
-            dismiss()
-        } else {
-            Toast.makeText(context!!, "Select farm boundaries on the map", Toast.LENGTH_SHORT)
+        if (farmerName == "Select a Farmer") {
+
+            Toast.makeText(context!!, "Choose a valid Farmer", Toast.LENGTH_SHORT)
                 .show()
+
+        } else {
+
+            //Checks for valid coordinates
+            if (farmCoordinates.size >= 1) {
+                farmDao.insert(
+                    Farm(
+                        farmerName,
+                        getFarmerLocalId(context!!, farmerName),
+                        farmName, farmLocation, farmCoordinates
+                    )
+                )
+                Log.d("FarmDialog", "Farm Saved")
+                dismiss()
+            } else {
+                Toast.makeText(context!!, "Select farm boundaries on the map", Toast.LENGTH_SHORT)
+                    .show()
+            }
+
         }
 
 

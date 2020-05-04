@@ -31,13 +31,13 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
+                <!--<TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="15dp"
                     android:text="@string/select_a_farmer"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="18sp" />
+                    android:textSize="18sp" />-->
 
                 <Spinner
                     android:id="@+id/farmersSpinner"
@@ -45,12 +45,26 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:drawableStart="@drawable/ic_format_size_black_24dp"
+                    android:drawablePadding="25dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/farm_name"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    app:fontFamily="@font/roboto" />
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/farmNameTextInputLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
                     android:hint="@string/farm_name"
                     app:counterEnabled="false"
                     app:errorEnabled="true"
@@ -64,12 +78,26 @@
                         android:inputType="textPersonName" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:drawableStart="@drawable/ic_location_city_black_24dp"
+                    android:drawablePadding="25dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/farm_location"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    app:fontFamily="@font/roboto" />
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/farmLocationTextInputLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
                     android:hint="@string/farm_location"
                     app:counterEnabled="false"
                     app:errorEnabled="true"
@@ -99,6 +127,13 @@
                     android:layout_height="300dp"
                     android:layout_margin="15dp" />
 
+
+                <Button
+                    android:id="@+id/save_farm_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="15dp"
+                    android:text="@string/save" />
 
             </LinearLayout>
         </ScrollView>
