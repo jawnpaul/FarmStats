@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
@@ -14,10 +15,10 @@ import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.utils.MPPointF
 import ng.com.knowit.farmstats.R
 import ng.com.knowit.farmstats.databinding.FragmentHomeBinding
-import ng.com.knowit.farmstats.db.FarmDatabase
-import ng.com.knowit.farmstats.db.FarmerDatabase
 import ng.com.knowit.farmstats.dialogs.NewFarmDialog
 import ng.com.knowit.farmstats.dialogs.NewFarmerCustomDialog
+import ng.com.knowit.farmstats.viewmodel.FarmViewModel
+import ng.com.knowit.farmstats.viewmodel.FarmerViewModel
 
 
 /**
@@ -26,6 +27,10 @@ import ng.com.knowit.farmstats.dialogs.NewFarmerCustomDialog
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+
+    private lateinit var farmersViewModel: FarmerViewModel
+
+    private lateinit var farmViewModel: FarmViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +41,14 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        super.onViewCreated(view, savedInstanceState)
+
+        farmersViewModel = ViewModelProviders.of(this).get(FarmerViewModel::class.java)
+
+        farmViewModel = ViewModelProviders.of(this).get(FarmViewModel::class.java)
 
         binding.createFarmerCard.setOnClickListener {
 
@@ -52,7 +64,6 @@ class HomeFragment : Fragment() {
         loadPieChart(numberOfFarms(), numberOfFarmers())
 
 
-        super.onViewCreated(view, savedInstanceState)
     }
 
     private fun loadPieChart(numberOfFarms: Int, numberOfFarmers: Int) {
@@ -86,13 +97,8 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun numberOfFarmers(): Int {
-        val farmerDao = FarmerDatabase.DatabaseProvider.getFarmerDatabase(context!!).farmerDao()
-        return farmerDao.getAllFarmerList().size
-    }
+    private fun numberOfFarmers() = farmersViewModel.getAllFarmersList().size
 
-    private fun numberOfFarms(): Int {
-        val farmDao = FarmDatabase.DatabaseProvider.getFarmDatabase(context!!).farmDao()
-        return farmDao.getAllFarmsList().size
-    }
+    private fun numberOfFarms() = farmViewModel.getAllFarmsList().size
+
 }

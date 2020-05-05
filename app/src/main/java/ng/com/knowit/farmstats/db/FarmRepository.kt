@@ -8,4 +8,7 @@ class FarmRepository(private val database: FarmDatabase) {
     fun getAllFarms(): LiveData<List<Farm>> {
         return database.farmDao().getAllFarms()
     }
+
+
+    fun getAllFarmsList() = database.farmDao().getAllFarmsList()
 }

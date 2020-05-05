@@ -15,7 +15,7 @@ import ng.com.knowit.farmstats.R
 import ng.com.knowit.farmstats.databinding.FragmentFarmersBinding
 import ng.com.knowit.farmstats.dialogs.NewFarmerCustomDialog
 import ng.com.knowit.farmstats.recycleradapters.FarmerAdapter
-import ng.com.knowit.farmstats.ui.FarmerViewModel
+import ng.com.knowit.farmstats.viewmodel.FarmerViewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -44,6 +44,7 @@ class FarmersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        super.onViewCreated(view, savedInstanceState)
         farmerViewModel.getAllFarmers().observe(this, Observer { farmers ->
 
             if (farmers.isEmpty()) {
@@ -66,6 +67,6 @@ class FarmersFragment : Fragment() {
             //open dialog for farmer creation
         }
 
-        super.onViewCreated(view, savedInstanceState)
+
     }
 }

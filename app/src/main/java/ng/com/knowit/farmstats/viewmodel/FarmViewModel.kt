@@ -1,4 +1,4 @@
-package ng.com.knowit.farmstats.ui
+package ng.com.knowit.farmstats.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -10,4 +10,6 @@ class FarmViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = FarmRepository(getFarmDatabase(application))
 
     fun getAllFarms() = repository.getAllFarms()
+
+    fun getAllFarmsList() = repository.getAllFarmsList()
 }
