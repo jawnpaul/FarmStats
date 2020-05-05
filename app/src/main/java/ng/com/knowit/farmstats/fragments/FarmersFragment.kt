@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ng.com.knowit.farmstats.R
 import ng.com.knowit.farmstats.databinding.FragmentFarmersBinding
+import ng.com.knowit.farmstats.dialogs.NewFarmerCustomDialog
 import ng.com.knowit.farmstats.recycleradapters.FarmerAdapter
 import ng.com.knowit.farmstats.ui.FarmerViewModel
 
@@ -45,10 +46,25 @@ class FarmersFragment : Fragment() {
 
         farmerViewModel.getAllFarmers().observe(this, Observer { farmers ->
 
+            if (farmers.isEmpty()) {
+                binding.addFarmerImageView.visibility = View.VISIBLE
+            } else {
+                binding.addFarmerImageView.visibility = View.GONE
+            }
+
             val adapter = FarmerAdapter(farmers, context!!)
 
             binding.farmersRecyclerView.adapter = adapter
+
+
         })
+
+
+        binding.addFarmerImageView.setOnClickListener {
+
+            NewFarmerCustomDialog.display(childFragmentManager)
+            //open dialog for farmer creation
+        }
 
         super.onViewCreated(view, savedInstanceState)
     }

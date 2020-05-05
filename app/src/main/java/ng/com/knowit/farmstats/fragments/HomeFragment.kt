@@ -46,7 +46,6 @@ class HomeFragment : Fragment() {
 
         binding.createFarmCard.setOnClickListener {
             //open dialog for farm creation
-
             NewFarmDialog.display(childFragmentManager)
         }
 
